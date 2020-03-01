@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html" 
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ace="http://www.icefaces.org/icefaces/components">
+<h:head>
+	<title>Main Page</title>
+	<style>
+     .graph .labels.x-labels {
+       text-anchor: middle;
+     }
+
+     .graph .labels.y-labels {
+       text-anchor: end;
+     }
+
+     .graph {
+       height: 540px;
+       width: 540px;
+       border: 2px solid black;
+       background: #e3d9da;
+     }
+
+     .graph .grid {
+       stroke: black;
+       stroke-dasharray: 0;
+       stroke-width: 1;
+     }
+
+     .labels {
+       font-size: 13px;
+     }
+
+     .label-title {
+       font-weight: bold;
+       text-transform: uppercase;
+       font-size: 12px;
+       fill: black;
+     }
+
+     .data {
+       fill: #bb4b64 ;
+       stroke-width: 1;
+       opacity: 60%;
+     }
+	</style>
+</h:head>
+<h:body>
+	<svg version="1.2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="graph" aria-labelledby="title" role="img">
+             <title id="title">хех лол</title>
+             <g class="grid x-grid" id="xGrid">
+               <line id="yline" x1="270" x2="270" y1="20" y2="520"></line>
+               <polygon id="ytrig" points="270,0 265,20 275,20" stroke="#acb299" fill="#acb299"></polygon>
+             </g>
+             <g class="grid y-grid" id="yGrid">
+               <line fill="black" id="xline" x1="20" x2="520" y1="270" y2="270"></line>
+               <polygon id="xtrig" points="520,265 520,275 540,270" stroke="#acb299" fill="#acb299"></polygon>
+             </g>
+             <g class="labels x-labels">
+               <text class="xpoint" x="120" y="270">-r</text>
+               <text class="xpoint" x="195" y="270">-r/2</text>
+               <text class="xpoint" x="270" y="270">0</text>
+               <text class="xpoint" x="345" y="270">r/2</text>
+               <text class="xpoint" x="420" y="270">r</text>
+               <text id="xp" x="430" y="265" class="label-title">x</text>
+             </g>
+             <g class="labels y-labels">
+               <text class="ypoint" x="270" y="120">r</text>
+               <text class="ypoint" x="270" y="195">r/2</text>
+               <text class="ypoint" x="270" y="270"></text>
+               <text class="ypoint" x="270" y="345">-r/2</text>
+               <text class="ypoint" x="270" y="420">-r</text>
+               <text id="yp" x="270" y="10" class="label-title">y</text>
+             </g>
+             <g class="data" data-setname="Our first data set">
+                 <rect class="meichu" x="195" y="270" width="75" height="150"/>
+                 <polygon id="triangle" class="meichu" points="270,270 345,270 270,345"></polygon>
+                 <path class="meichu" d="M 270 120 A 150 150, 90, 0, 0, 120 270 L 270 270 Z"></path>
+             </g>
+           </svg>
+	<h:form id="newData">
+		<h:outputLabel for="sliderx" value="x"/>
+		<ace:sliderEntry id="sliderx" 
+			axis="x" 
+			clickableRail="true"
+			length="150"
+			min="-2"
+			max="2"
+			stepPercent="25"
+			showLabels="true"
+			value="#{labaBean.menuItem.slider}">
+		</ace:sliderEntry>
+		<h:outputText value="#{labaBean.menuItem.slider}"/>
+		<h:outputLabel for="ytext" value="y"/>
+		<h:inputText id="ytext" value="#{labaBean.menuItem.input}">
+			<f:validator validatorId="textValidator"/>
+		</h:inputText>
+		<h:outputLabel for="selectr" value="r"/>
+		<ace:simpleSelectOneMenu id="selectr" value="#{labaBean.menuItem.select}"> 
+			<f:selectItem itemValue="1" itemLabel="1"/> 
+			<f:selectItem itemValue="1.5" itemLabel="1.5"/>
+			<f:selectItem itemValue="2" itemLabel="2"/> 
+			<f:selectItem itemValue="2.5" itemLabel="2.5"/> 
+			<f:selectItem itemValue="3" itemLabel="3"/> 
+		</ace:simpleSelectOneMenu>
+		<h:commandButton value="Check" action="#{labaBean.addItem()}">
+			<f:ajax execute="newData" render="pointTable"/>
+		</h:commandButton>
+
+		<h:panelGroup id="pointTable">
+			<h:dataTable value="#{labaBean.items}" var="point">
+				<h:column>
+					<f:facet name="header">X</f:facet>
+					#{point.slider}
+				</h:column>
+				<h:column>
+					<f:facet name="header">Y</f:facet>
+					#{point.input}
+				</h:column>
+				<h:column>
+					<f:facet name="header">R</f:facet>
+					#{point.select}
+				</h:column>
+			</h:dataTable>
+		</h:panelGroup>
+	</h:form>
+</h:body>
+</html>
