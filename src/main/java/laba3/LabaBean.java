@@ -13,10 +13,17 @@ import java.util.List;
 public class LabaBean implements Serializable{
 	private MenuItem menuItem = new MenuItem();
 
+	private String x;
+	private String y;
+
 	private List<MenuItem> items = new ArrayList<MenuItem>();
 
 	public void addItem(){
 		items.add(menuItem);
 		menuItem = new MenuItem();
+	}
+
+	public void suka(){
+		System.out.println(x + " " + y);
 	}
 }
