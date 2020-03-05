@@ -7,11 +7,18 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.faces.event.ValueChangeEvent;
+import javax.faces.bean.ManagedProperty;
+import java.util.Map;
+import javax.faces.context.FacesContext;
+
 
 @ManagedBean
 @ViewScoped
 @Data
 public class LabaBean implements Serializable{
+	//@ManagedProperty(value = "#{param.ximg}")
+	//private String ximg;
+
 	private MenuItem menuItem = new MenuItem();
 	private MenuItem imageItem = new MenuItem();
 
@@ -39,7 +46,7 @@ public class LabaBean implements Serializable{
 		menuItem.setSlider(0);
 	}
 
-	public void suka(){
+	/*public void suka(){
 		System.out.println(this.radius);
 		imageItem.setSelect(this.radius);
 		System.out.println(imageItem.getSlider() +" "+ imageItem.getInput()+" "+imageItem.getSelect());
@@ -47,5 +54,18 @@ public class LabaBean implements Serializable{
 		imageItem.normalizeItems();
 		items.add(imageItem);
 		imageItem = new MenuItem();
+	}*/
+
+	public void imgListener(){
+		Map<String, String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
+		String param1 = params.get("ximg");
+		String param2 = params.get("suka");
+		imageItem.setSlider(Integer.parseInt(param1));
+		imageItem.setInput(param2);
+		imageItem.setSelect(this.radius);
+		imageItem.normalizeItems();
+		items.add(imageItem);
+		imageItem = new MenuItem();
+		
 	}
 }

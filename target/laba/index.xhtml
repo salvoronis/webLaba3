@@ -12,9 +12,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
   </h:head>
   <h:body>
-    <!--<h:form>-->
-      <h:panelGroup id="image">
-      <h:commandLink value="">
+    <h:form>
         <svg id="fuck" version="1.2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="graph" aria-labelledby="title" role="img">
           <title id="title">jsf очень больно</title>
           <g class="grid x-grid" id="xGrid">
@@ -47,11 +45,8 @@
             <path class="meichu" d="M #{270-labaBean.radius*25} 270 A 90 90, 0, 0, 0, 270 #{270+labaBean.radius*25} L 270 270 Z"></path>
           </g>
         </svg>
-        <f:ajax action="click" listener="#{labaBean.suka}" render="pointTable"/>
-      </h:commandLink>
-      </h:panelGroup>
-    <!--</h:form>-->
-
+        <p:remoteCommand name="fuckingImg" update="pointTable" actionListener="#{labaBean.imgListener}"/>
+    </h:form>
 
     <h:form id="fields">
       <h:outputLabel for="sliderx" value="x"/>
@@ -81,16 +76,13 @@
         <ace:ajax execute="fields" render=":r :image"/>
       </ace:simpleSelectOneMenu>
       <h:commandButton value="Check" action="#{labaBean.addItem()}">
-        <f:ajax execute="fields" render=":pointTable"/>
+        <!--<f:ajax execute="fields" render=":pointTable"/>-->
       </h:commandButton>
     </h:form>
 
-    <p:outputPanel>
-      <h:inputHidden id="r" value="#{labaBean.radius}"/>
-      <h:inputHidden id="x" value="#{labaBean.imageItem.slider}"/>
-      <h:inputHidden id="y" value="#{labaBean.imageItem.input}"/>
-      <script type="text/javascript">hui()</script>
-    </p:outputPanel>
+    <!--<h:inputHidden id="r" value="#{labaBean.radius}"/>-->
+    <!--<h:inputHidden id="x" value="#{labaBean.imageItem.slider}"/>
+    <h:inputHidden id="y" value="#{labaBean.imageItem.input}"/>-->
 
     <h:panelGroup id="pointTable">
       <h:dataTable value="#{labaBean.items}" var="point">
