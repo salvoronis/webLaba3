@@ -15,7 +15,7 @@ public class LabaBean implements Serializable{
 	private MenuItem menuItem = new MenuItem();
 	private MenuItem imageItem = new MenuItem();
 
-	private String radius = "4";
+	private String radius = "1";
 
 	private List<MenuItem> items = new ArrayList<MenuItem>();
 
