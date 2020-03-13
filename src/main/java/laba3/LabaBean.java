@@ -49,6 +49,17 @@ public class LabaBean implements Serializable{
 		menuItem.setSelect(this.radius);
 		menuItem.normalizeForm();
 		items.add(menuItem);
+
+		try {
+			Session session = HibernateUtil.getSessionFactory().openSession();
+            session.beginTransaction();
+            System.out.println(menuItem);
+            session.save(menuItem);
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            System.out.println("Ошибка парсинга");
+        }
+		
 		menuItem = new MenuItem();
 		menuItem.setSlider(0);
 	}

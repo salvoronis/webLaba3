@@ -5,22 +5,23 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui">
-   	<f:view>
-      	<h:head>
-         	<title>НАКОНЕЦ-ТО</title>
-         	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-         	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-      	</h:head>
-      	<h:body>
-         	<header>
-         		<p>Лабораторная №3 <br/> Яремко Роман <br/> Лазурин Евгений</p>
-         	</header>
-         	<div id = "content">
-        		<p:clock autoSync="false" syncInterval="10000" mode="client" displayMode="analog"/>
+    <f:view>
+        <h:head>
+          <title>НАКОНЕЦ-ТО</title>
+          <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+          <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+          <h:outputStylesheet library="css" name="style.css"/>
+        </h:head>
+        <h:body>
+          <header class="header">
+            <p class="info"><span class="lab">Лабораторная №3</span><br/> Яремко Роман <br/> Лазурин Евгений</p>
+          <div id = "content">
+            <p:clock autoSync="false" id="clock" syncInterval="10000" mode="client" displayMode="analog"/>
                 <h:form>
-                    <h:commandButton action="index" value="В ад"/>
+                    <h:commandButton class="super_button" action="index" value="В ад"/>
                 </h:form>
-         	</div>
-      	</h:body>
-   	</f:view>
+          </div>
+          </header>
+        </h:body>
+    </f:view>
 </html>

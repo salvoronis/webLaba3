@@ -1,0 +1,10 @@
+ 
+@font-face {
+	font-family: 'Rubik', sans-serif;
+	src: url('/laba/javax.faces.resource/fonts/Rubik-Light.ttf');
+}
+
+@font-face {
+	font-family: 'FiraCode-Light', sans-serif;
+	src: url('/laba/javax.faces.resource/fonts/FiraCode-Light.ttf');
+}

@@ -5,7 +5,8 @@
   xmlns:h="http://java.sun.com/jsf/html" 
   xmlns:f="http://xmlns.jcp.org/jsf/core"
   xmlns:ace="http://www.icefaces.org/icefaces/components"
-  xmlns:p="http://primefaces.org/ui">
+  xmlns:p="http://primefaces.org/ui"
+  xmlns:ui="http://java.sun.com/jsf/facelets">
   <h:head>
     <title>Page</title>
     <h:outputStylesheet library="css" name="style.css"/>
@@ -42,6 +43,9 @@
           <rect class="meichu" x="270" y="270" width="#{labaBean.radius*50}" height="#{labaBean.radius*25}"/>
           <polygon id="triangle" class="meichu" points="270,270 #{labaBean.radius*50+270},270 270,#{270-labaBean.radius*25}"></polygon>
           <path class="meichu" d="M #{270-labaBean.radius*25} 270 A 90 90, 0, 0, 0, 270 #{270+labaBean.radius*25} L 270 270 Z"></path>
+          <ui:repeat value="#{labaBean.items}" var="item">
+            <circle cx="#{item.x*50+273}" cy="#{-item.y*50+270}" r="5"/>
+          </ui:repeat>
         </g>
       </svg>
 
@@ -81,6 +85,10 @@
 
     <p:panel id="tablePanel" rendered="true">
       <h:dataTable id="sukablad" value="#{labaBean.items}" var="point">
+        <h:column>
+          <f:facet name="header">ID</f:facet>
+          #{point.id}
+        </h:column>
         <h:column>
           <f:facet name="header">X</f:facet>
           #{point.x}
