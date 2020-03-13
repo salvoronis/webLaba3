@@ -2,31 +2,61 @@ package com.laba3;
 
 import lombok.Data;
 import java.lang.Math;
+import javax.persistence.*;
+import oracle.jdbc.driver.OracleDriver;
 
 
 @Data
+@Entity
+@Table(name = "ITEM")
 public class MenuItem{
-	private Integer slider = 0;
-	private String input = "0";
-	private String select;
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "ID")
+	private Integer id;
 
+	@Column(name = "X")
+	private Integer slider = 0;
+	@Column(name = "Y")
+	private Integer input = 0;
+	@Column(name = "R")
+	private Integer select;
+
+	@Column(name = "XPIX")
 	private double x;
+	@Column(name = "YPIX")
 	private double y;
+	@Column(name = "RPIX")
 	private double r;
+	@Column(name = "RESULT")
 	private String result;
+
+	public MenuItem(){
+
+	}
+	public MenuItem(Integer id, Integer slider, Integer input, Integer select, double x, double y, double r, String result){
+		this.id = id;
+		this.slider = slider;
+        this.input = input;
+        this.select = select;
+        this.x = x;
+        this.y = y;
+        this.r = r;
+        this.result = result;
+	}
 
 	public void normalizeItems(){
 		this.x = ((double)slider-282.0)/50.0;
-		this.y = -(Float.parseFloat(input)-282.0)/50.0;
-		this.r = Float.parseFloat(select);
+		this.y = -((double)input-282.0)/50.0;
+		this.r = (double)select;
 		checkIt();
 	}
 
 	public void normalizeForm(){
 		System.out.println(slider);
-		this.y = Float.parseFloat(input);
+		this.y = (double)input;
 		this.x = slider.equals(null) ? 0.0 : (float)slider;
-		this.r = Float.parseFloat(select);
+		this.r = (double)select;
 		checkIt();
 	}
 
@@ -40,5 +70,10 @@ public class MenuItem{
 		} else {
 			this.result = "Промах";
 		}
+	}
+
+	@Override
+	public String toString(){
+		return "id "+id+" slider "+slider+" input "+input+" select "+select+" x "+x+" y "+y+" r "+r+" result "+result;
 	}
 }
