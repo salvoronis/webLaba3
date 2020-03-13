@@ -8,7 +8,7 @@ import oracle.jdbc.driver.OracleDriver;
 
 @Data
 @Entity
-@Table(name = "ITEM")
+@Table(name = "ITEMS")
 public class MenuItem{
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
