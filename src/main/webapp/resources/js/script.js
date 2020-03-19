@@ -1,11 +1,21 @@
 $("svg").on("click",function(event){
-	console.log("pizdec blyzd");
-	//$("input[id$='x']").val(event.pageX);
-	//$("input[id$='y']").val(event.pageY);
 	fuckingImg([{name:'ximg',value:event.pageX},{name:'suka',value:event.pageY}]);
-	//var data = event.pageX+','+event.pageY
-	//fuckingImg([{suka:event.pageX+','+event.pageY}]);
 });
+function check() {
+    if ($("#ytext").val() != '')
+        $("#formjs").removeAttr('disabled');
+    else
+        $("#formjs").attr('disabled', 'false');
+}
+/*$("formjs").on("click", function(event){
+    console.log($("#ytext").val);
+    console.log(widget_helpme_sliderx.getValue());
+    //fuckingForm([{name:'xform',value:event.pageX},{name:'yform',value:event.pageY}]);
+});*/
+/*function formfuck(){
+    console.log($("#ytext").val());
+    console.log(widget_helpme_sliderx.getValue());
+}*/
 function renderImg(value){
 	console.log(value);
 

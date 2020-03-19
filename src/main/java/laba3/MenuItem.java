@@ -18,9 +18,9 @@ public class MenuItem{
 	@Column(name = "X")
 	private Integer slider = 0;
 	@Column(name = "Y")
-	private Integer input = 0;
+	private Integer input;
 	@Column(name = "R")
-	private Integer select;
+	private Double select;
 
 	@Column(name = "XPIX")
 	private double x;
@@ -34,7 +34,7 @@ public class MenuItem{
 	public MenuItem(){
 
 	}
-	public MenuItem(Integer id, Integer slider, Integer input, Integer select, double x, double y, double r, String result){
+	public MenuItem(Integer id, Integer slider, Integer input, Double select, double x, double y, double r, String result){
 		this.id = id;
 		this.slider = slider;
         this.input = input;
@@ -46,8 +46,8 @@ public class MenuItem{
 	}
 
 	public void normalizeItems(){
-		this.x = ((double)slider-282.0)/50.0;
-		this.y = -((double)input-282.0)/50.0;
+		this.x = ((double)slider-270.0)/50.0;
+		this.y = -((double)input-270.0)/50.0;
 		this.r = (double)select;
 		checkIt();
 	}

@@ -11,6 +11,8 @@ import javax.faces.bean.ManagedProperty;
 import java.util.Map;
 import javax.faces.context.FacesContext;
 import org.hibernate.Session;
+import java.util.Collections;
+
 
 
 @ManagedBean
@@ -20,7 +22,7 @@ public class LabaBean implements Serializable{
 	private MenuItem menuItem = new MenuItem();
 	private MenuItem imageItem = new MenuItem();
 
-	private Integer radius = 1;
+	private Double radius = 1.0;
 
 	private List<MenuItem> items = new ArrayList<MenuItem>();
 
@@ -33,7 +35,6 @@ public class LabaBean implements Serializable{
 			Session session = HibernateUtil.getSessionFactory().openSession();
             session.beginTransaction();
             items =  (List<MenuItem>)session.createQuery("From MenuItem").list();
-            System.out.println(items);
         } catch (Exception e){
             e.printStackTrace();
         }
@@ -41,8 +42,7 @@ public class LabaBean implements Serializable{
 
 	public void change(ValueChangeEvent event){
 		String value = event.getNewValue().toString();
-		this.radius = Integer.parseInt(value);
-		System.out.println(this.radius);
+		this.radius = Double.parseDouble(value);
 	}
 
 	public void addItem(){
@@ -53,7 +53,6 @@ public class LabaBean implements Serializable{
 		try {
 			Session session = HibernateUtil.getSessionFactory().openSession();
             session.beginTransaction();
-            System.out.println(menuItem);
             session.save(menuItem);
             session.getTransaction().commit();
         } catch (Exception e) {
@@ -62,6 +61,12 @@ public class LabaBean implements Serializable{
 		
 		menuItem = new MenuItem();
 		menuItem.setSlider(0);
+	}
+
+	public void formListener(){
+		Map<String, String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
+		String x = params.get("xform");
+		String y = params.get("yform");
 	}
 
 	public void imgListener(){
@@ -77,7 +82,6 @@ public class LabaBean implements Serializable{
 		try {
 			Session session = HibernateUtil.getSessionFactory().openSession();
             session.beginTransaction();
-            System.out.println(imageItem);
             session.save(imageItem);
             session.getTransaction().commit();
         } catch (Exception e) {
