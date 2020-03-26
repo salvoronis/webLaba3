@@ -1,8 +1,5 @@
-$("svg").on("click",function(event){
+$("#fuck").on("click",function(event){
     fuckingImg([{name:'ximg',value:event.pageX},{name:'suka',value:event.pageY}]);
-    window.getThisMotherfucker = function(xhr, status, args) {
-        alert(args.returnedValue);
-    }
 });
 function check() {
     if ($("#ytext").val() != '')
@@ -30,4 +27,8 @@ function renderImg(value){
         var kuda = (index*valh)+(270-value);
         $(this).attr('x',kuda);
     });
+}
+
+function doDot(color, x, y){
+    $(".data").append('<circle style="fill: '+color+'" cx="'+x+'" cy="'+y+'" r="5"/>');
 }

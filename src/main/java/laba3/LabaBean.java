@@ -12,7 +12,7 @@ import java.util.Map;
 import javax.faces.context.FacesContext;
 import org.hibernate.Session;
 import java.util.Collections;
-
+import org.primefaces.context.RequestContext;
 
 
 @ManagedBean
@@ -60,6 +60,12 @@ public class LabaBean implements Serializable{
         } catch (Exception e) {
             System.out.println("Ошибка парсинга");
         }
+
+        RequestContext rc = RequestContext.getCurrentInstance();
+        String color = menuItem.getResult().equals("Попадание") ? "green" : "black";
+        rc.addCallbackParam("color", color);
+        rc.addCallbackParam("x", menuItem.getX()*50+270);
+        rc.addCallbackParam("y", -menuItem.getY()*50+270);
 		
 		menuItem = new MenuItem();
 		menuItem.setSlider(0);
@@ -89,6 +95,12 @@ public class LabaBean implements Serializable{
         } catch (Exception e) {
             System.out.println("Ошибка парсинга");
         }
+
+        RequestContext rc = RequestContext.getCurrentInstance();
+        String color = imageItem.getResult().equals("Попадание") ? "green" : "black";
+        rc.addCallbackParam("color", color);
+        rc.addCallbackParam("x", imageItem.getX()*50+270);
+        rc.addCallbackParam("y", -imageItem.getY()*50+270);
 
 		imageItem = new MenuItem();
 		

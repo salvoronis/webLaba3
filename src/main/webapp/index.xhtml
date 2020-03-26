@@ -11,6 +11,27 @@
     <title>Page</title>
     <h:outputStylesheet library="css" name="style.css"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <script type="application/javascript">
+     /* <![CDATA[ */
+      function handleMsg(xhr, status, args){
+       var color = args.color;
+       var x = args.x;
+       var y = args.y;
+       
+       $('#pizdec').attr('cx', x);
+       $('#pizdec').attr('cy', y);
+       
+       var svgns = "http://www.w3.org/2000/svg";
+       var group = document.createElementNS(svgns, 'g');
+        var circle = document.createElementNS(svgns, 'circle');
+        group.setAttributeNS(null, 'transform', 'translate('+ x + ', '+ y + ')');
+        circle.setAttributeNS(null, 'r', 5);
+        circle.setAttributeNS(null, 'fill', color);
+        group.appendChild(circle);
+        document.getElementById('fuck').appendChild(group);
+    }
+     /* ]]> */
+   </script>
   </h:head>
   <h:body>
       <svg id="fuck" version="1.2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="graph" aria-labelledby="title" role="img">
@@ -43,6 +64,7 @@
             <rect class="meichu" x="270" y="270" width="#{labaBean.radius*50}" height="#{labaBean.radius*25}"/>
             <polygon id="triangle" class="meichu" points="270,270 #{labaBean.radius*50+270},270 270,#{270-labaBean.radius*25}"></polygon>
             <path class="meichu" d="M #{270-labaBean.radius*25} 270 A 90 90, 0, 0, 0, 270 #{270+labaBean.radius*25} L 270 270 Z"></path>
+            <circle id="pizdec" style="fill: red" cx="100" cy="100" r="15"/>
             <ui:repeat value="#{labaBean.items}" var="item">
               <circle style="fill: #{item.result.equals('Попадание')? 'green' : 'black'}" cx="#{item.x*50+270}" cy="#{-item.y*50+270}" r="5"/>
             </ui:repeat>
@@ -50,8 +72,8 @@
         </svg>
 
     <h:form id="helpme">
-      <p:remoteCommand name="fuckingImg" update="tablePanel" action="#{labaBean.imgListener}"
-      oncomplete="getThisMotherfucker(xhr, status, args);"/>
+      <p:remoteCommand name="fuckingImg" update="tablePanel" actionListener="#{labaBean.imgListener}"
+      oncomplete="handleMsg(xhr, status, args);"/>
 
       <h:outputLabel for="sliderx" value="x"/>
       <ace:sliderEntry id="sliderx" 
@@ -79,8 +101,8 @@
         <f:selectItem itemValue="2.5" itemLabel="2.5"/> 
         <f:selectItem itemValue="3" itemLabel="3"/>
       </h:selectOneMenu>
-      <h:commandButton id="formjs" value="Check" action="#{labaBean.addItem()}" onclick="formfuck()">
-      </h:commandButton>
+      <p:commandButton id="formjs" value="Check"  action="#{labaBean.addItem()}" oncomplete="handleMsg(xhr, status, args);">
+      </p:commandButton>
       <h:commandButton action="start" value="Стартовая страница"/>
     </h:form>
 
