@@ -1,7 +1,7 @@
 package com.laba3;
 
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.faces.bean.ApplicationScoped;
 import lombok.Data;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -16,11 +16,13 @@ import java.util.Collections;
 
 
 @ManagedBean
-@ViewScoped
+@ApplicationScoped
 @Data
 public class LabaBean implements Serializable{
 	private MenuItem menuItem = new MenuItem();
 	private MenuItem imageItem = new MenuItem();
+
+	private String ytext;
 
 	private Double radius = 1.0;
 

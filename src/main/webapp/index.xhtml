@@ -50,7 +50,7 @@
         </svg>
 
     <h:form id="helpme">
-      <p:remoteCommand name="fuckingImg" update="tablePanel" actionListener="#{labaBean.imgListener}"/>
+      <p:remoteCommand name="fuckingImg" update="tablePanel"  actionListener="#{labaBean.imgListener}"/>
 
       <h:outputLabel for="sliderx" value="x"/>
       <ace:sliderEntry id="sliderx" 
@@ -64,10 +64,11 @@
         value="#{labaBean.menuItem.slider}">
       </ace:sliderEntry>
       <br/>
+      <h:message for="ytext" rendered="true" style="color: red"/>
+      <br/>
       <h:outputLabel for="ytext" value="y"/>
-      <h:inputText id="ytext" value="#{labaBean.menuItem.input}">
+      <h:inputText id="ytext" value="#{labaBean.menuItem.input}" requiredMessage="Please enter Y " required="true">
         <f:validator validatorId="textValidator"/>
-        <f:validateLength minimum="1" maximum="2"/>
       </h:inputText>
       <h:outputLabel for="selectr" value="r"/>
       <h:selectOneMenu id="selectr" value="#{labaBean.radius}" valueChangeListener="#{labaBean.change}" onchange="renderImg(this.value)"> 
@@ -77,8 +78,7 @@
         <f:selectItem itemValue="2.5" itemLabel="2.5"/> 
         <f:selectItem itemValue="3" itemLabel="3"/>
       </h:selectOneMenu>
-      <h:commandButton id="formjs" value="Check" action="#{labaBean.addItem()}" onclick="formfuck()" disabled="disable">
-        <!--<p:ajax execute="@form" render="@this" update="tablePanel"/>-->
+      <h:commandButton id="formjs" value="Check" action="#{labaBean.addItem()}" onclick="formfuck()">
       </h:commandButton>
       <h:commandButton action="start" value="Стартовая страница"/>
     </h:form>

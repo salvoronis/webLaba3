@@ -26,7 +26,7 @@ public class TextValidator implements Validator{
 	public void validate(FacesContext context, UIComponent component, Object value) throws ValidatorException {
 		Matcher matcher = pattern.matcher(value.toString());
 		if (!matcher.matches()) {
-			FacesMessage msg = new FacesMessage("Invalid Y");
+			FacesMessage msg = new FacesMessage("Invalid Y", "Incorrect Y");
 			msg.setSeverity(FacesMessage.SEVERITY_ERROR);
 			throw new ValidatorException(msg);
 		}
